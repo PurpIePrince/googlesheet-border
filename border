@@ -1,0 +1,21 @@
+function onEdit(e) {
+  var sheet = e.source.getActiveSheet();
+  var range = e.range;
+  var row = range.getRow();
+  var value = range.getValue();
+  
+  // 변경된 시트의 이름이 "2024사용내역"이 아니면 종료
+  if (sheet.getName() !== "2024사용내역") return;
+  
+  // 변경된 셀이 A열이 아니거나, 4행 미만인 경우 종료
+  if (range.getColumn() !== 1 || row < 4) return;
+  
+  // 변경된 행에 대해 테두리를 추가하거나 삭제합니다.
+  // var lastColumn = sheet.getLastColumn();
+  var borderRange = sheet.getRange(row, 1, 1, 6);
+  if (value !== "") {
+    borderRange.setBorder(true, true, true, true, true, true);
+  } else {
+    borderRange.setBorder(null, false, false, false, false, false);
+  }
+}
